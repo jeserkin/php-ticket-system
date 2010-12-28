@@ -5,9 +5,9 @@ if(!defined('SYSPATH')) exit('No direct script access allowed!');
 
 /**
  * Ticket System
- * 
+ *
  * Non-commercial application.
- * 
+ *
  * @package			TicketSystem
  * @author			Eugene Serkin
  * @copyright		Copyright (c) 2010, Art-Coder
@@ -20,7 +20,7 @@ if(!defined('SYSPATH')) exit('No direct script access allowed!');
 
 /**
  * Database connection class
- * 
+ *
  * @package			TicketSystem
  * @subpackage		Database
  * @category		Libraries
@@ -36,32 +36,32 @@ class DatabaseConnection {
 	 * @var string
 	 */
 	protected $DB_HOST = "localhost";
-	
+
 	/**
 	 * Database name.
 	 * @var string
 	 */
-	protected $DB_NAME = "artcoder_ticksys";
-	
+	protected $DB_NAME = "ticket_system";
+
 	/**
 	 * Database user name.
 	 * @var string
 	 */
-	protected $DB_USER = "artcoder_syskcit";
-	
+	protected $DB_USER = "root";
+
 	/**
 	 * Database user password.
 	 * @var string
 	 */
-	protected $DB_PASS = "Jcx}G#;mmr[6";
-	
+	protected $DB_PASS = "toor";
+
 	/**
 	 * Database table prefix.
 	 * (OPTIONAL) - Database table prefix. (NOT USED AT THE MOMENT)
 	 * @var string
 	 */
-	protected $DB_PREFIX = "ts_";
-	
+	protected $DB_PREFIX = "";
+
 }
 //	END DatabaseConnection Class
 

@@ -1,13 +1,35 @@
 <?php
 
-# Will be finished later
-//$cache->writeDataToFile();
+function createBlocker()
+{
+	$sentence = '//This is blocker file.';
+	file_put_contents( APPPATH . '/cache/blocker', $sentence );
+}
 
+function removeBlocker()
+{
+	unlink( APPPATH . '/cache/blocker' );
+}
 
-// A way to get data in view
-//$mix = $db->fetchAssoc1("SELECT * FROM ts_users");
-//foreach($mix as $key=>$val) {
-//	echo $mix[$key]['id']." ".$mix[$key]['username']." ".$mix[$key]['userpass']." ".$mix[$key]['email']." ".$mix[$key]['ugroup']."<br />";
-//}
+function doesBlockerExist()
+{
+	if ( file_exists( APPPATH . '/cache/blocker' ) )
+	{
+		return true;
+	}
+
+	return false;
+}
+
+if ( ! doesBlockerExist() )
+{
+	// Will be finished later
+	$cache->writeDataToFile();
+	createBlocker();
+}
+else
+{
+	echo 'Settings already set.';
+}
 
 ?>
