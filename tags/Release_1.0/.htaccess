@@ -1,0 +1,17 @@
+DirectoryIndex index.php
+
+Options -Indexes
+
+<ifModule mod_rewrite.c>
+	RewriteEngine On
+
+	RewriteRule ^$ index.php
+
+	RewriteRule ^(sign_out)(/)?$ index.php?$1=true
+
+	RewriteRule ^(dashboard)/([a-zA-Z]+)(/)?$ index.php?show=$1&method=$2
+	RewriteRule ^(dashboard)/([0-9]+)(/)?$ index.php?show=$1&page=$2
+	RewriteRule ^(dashboard)/(viewticket)/([0-9]+)(/)?$ index.php?show=$1&method=$2&ticket=$3
+
+	RewriteRule ^([a-zA-Z0-9]+)(/)?$ index.php?show=$1
+</ifModule>
