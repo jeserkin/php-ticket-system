@@ -43,7 +43,7 @@ ul {
 	padding: 0;
 }
 
-caption, th { text-align: left; }			
+caption, th { text-align: left; }
 
 *:focus {
 	outline: 0;
@@ -214,7 +214,7 @@ input.formSubmit:hover {
 .list li {
 	border-top: 1px solid #D5D5D5;
 	height: 25px;
-	padding: 0px 0;
+	padding: 0 0;
 	clear: both;
 }
 
@@ -436,7 +436,7 @@ input.formSubmit:hover {
 
 #ticketMain #ticketTools {
 	height: 25px;
-	border-bottom: 1px solid #C4C4C4; 
+	border-bottom: 1px solid #C4C4C4;
 }
 
 #ticketMain #ticketContent { width: 460px; }
@@ -583,7 +583,7 @@ div.optional { display: none; }
 	overflow: hidden;
 }
 
-#innerFooter a { color: #7FE314; }			
+#innerFooter a { color: #7FE314; }
 
 #innerFooter a:hover { color: #582; }
 
@@ -619,10 +619,10 @@ div.optional { display: none; }
 
 #acp ul li.elems {
 	border-bottom: 1px solid #E5E5E5;
-	padding: 2px 0px;
+	padding: 2px 0;
 }
 
-#acp ul li.last { padding: 2px 0px; }
+#acp ul li.last { padding: 2px 0; }
 
 #newTest {
 	border: 1px solid #E5E5E5;
@@ -669,7 +669,7 @@ div.optional { display: none; }
 #newTest div.s {
 	text-align: right;
 	padding: 0 10px 10px;
-	
+
 }
 
 #topQuotes {
