@@ -4,7 +4,7 @@ Installation process
 
 1. DATABASE SETUP
 	- Open your MySQL control panel. (e.g. phpMyAdmin)
-	- Create new database and choose collation 'utf8_unicode_ci'. (e.g. ticket_system)
+	- Create new database and choose collation 'utf8_general_ci'. (e.g. ticket_system)
 2. CONFIGURING DATABASE CONNECTION
 	- After database is setup we need to edit one file.
 	- To be more precise `./system/libraries/database/DatabaseConnection.php`

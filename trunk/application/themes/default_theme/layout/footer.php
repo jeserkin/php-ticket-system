@@ -9,7 +9,7 @@ if(!defined('SYSPATH')) exit('No direct script access allowed!');
 		<div id="footer">
 			<div id="innerFooter">
 				<div>
-					<span class="left">&copy; 2010 Powered by Ticket System <strong>(</strong>buid <a href="<?php echo $appData['base_url'].'/license/'; ?>">030710.2211</a><strong>)</strong></span>
+					<span class="left">&copy; 2010 Powered by Ticket System <strong>(</strong>buid <a href="<?php echo $appData['base_url'].'/lic/'; ?>">030710.2211</a><strong>)</strong></span>
 				</div>
 				<div>
 					<span class="right">Script by <a href="<?php echo $appData['base_url']; ?>">Eugene Serkin</a></span>
@@ -29,7 +29,7 @@ if(!defined('SYSPATH')) exit('No direct script access allowed!');
 				});
 				/* OR $('a#myadmin').attr('target', '_blank'); */
 			});
-			
+
 			var err = new Fx.Tween('error', {
 				link: 'chain',
 				property: 'opacity',

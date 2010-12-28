@@ -29,7 +29,7 @@ defined('ROOT') or define('ROOT', str_replace(SELF, "", __FILE__));
 
 /* Three main paths */
 # Path to public folder. Use it only if NECCESARY.
-defined('PUBPATH') or define('PUBPATH', realpath(ROOT."/".$public_foler));
+defined('PUBPATH') or define('PUBPATH', realpath(ROOT."/".$public_folder));
 # Path to application folder.
 defined('APPPATH') or define('APPPATH', realpath(ROOT."/".$application_folder));
 # Path to system folder.
@@ -61,7 +61,7 @@ $validator = new Validation();
 # Create User instance
 $umanager = new UserManager($db, $validator);
 
-# Assuming, that user will Sign In 
+# Assuming, that user will Sign In
 # and that he will create or work with tickets
 $ticket = new Ticket($db, $validator);
 
@@ -92,17 +92,17 @@ if(!isset($_REQUEST['show']) && !@$_REQUEST['sign_out']) {
 				header("Location: ./dashboard/");
 			}
 		}
-		
+
 		if(!$umanager->isSignedIn()) {
 			# Link header
 			require_once(realpath(APPPATH.'/themes/'.$config['default_theme'].'/layout/header'.EXT));
 			# Link home page
 			require_once(realpath(APPPATH.'/pages/main'.EXT));
-			
+
 			# Link additional part (Funny quotes) - TEMPORARY
 			require_once(realpath(APPPATH.'/themes/'.$config['default_theme'].'/layout/quotes'.EXT));
 			# TEMPORARY
-			
+
 			# Link footer
 			require_once(realpath(APPPATH.'/themes/'.$config['default_theme'].'/layout/footer'.EXT));
 		} else {
@@ -115,19 +115,19 @@ if(!isset($_REQUEST['show']) && !@$_REQUEST['sign_out']) {
 	if(isset($_POST['signUp'])) {
 		$umanager->signUp($_POST['username'], $_POST['userpass1'], $_POST['userpass2'], $_POST['email']);
 	}
-	
+
 	# If user creates ticket
 	if(isset($_POST['newTicket'])) {
 		$ticket->addTicket($_POST['ticketUrgency'], $_POST['ticketServices'], $_POST['ticketSubject'], $_POST['ticket']);
 	}
-	
+
 	if(isset($_POST['ticketClose'])) {
 		$ticket->changeTicketStatus($_REQUEST['ticket'], 2);
 	}
-	
+
 	# Link header
 	require_once(realpath(APPPATH.'/themes/'.$config['default_theme'].'/layout/header'.EXT));
-	
+
 	# Check does requested page exist or not
 	if(file_exists(realpath(APPPATH.'/pages/'.$_REQUEST['show'].EXT))) {
 		switch($_REQUEST['show']) {
@@ -155,7 +155,7 @@ if(!isset($_REQUEST['show']) && !@$_REQUEST['sign_out']) {
 					$error->forbidden();
 				}
 				break;
-			case "license":
+			case "lic":
 			case "temp":
 				require_once(realpath(APPPATH.'/pages/'.$_REQUEST['show'].EXT));
 				break;
@@ -163,11 +163,11 @@ if(!isset($_REQUEST['show']) && !@$_REQUEST['sign_out']) {
 	} else {
 		$error->notFound();
 	}
-	
+
 	# Link additional part (Funny quotes) - TEMPORARY
 	require_once(realpath(APPPATH.'/themes/'.$config['default_theme'].'/layout/quotes'.EXT));
 	# TEMPORARY
-	
+
 	# Link footer
 	require_once(realpath(APPPATH.'/themes/'.$config['default_theme'].'/layout/footer'.EXT));
 }
