@@ -1,35 +1,11 @@
 <?php
 
-# Check was this fil linked directly
-if(!defined('SYSPATH')) exit('No direct script access allowed!');
-
 /**
- * Ticket System
- *
- * Non-commercial application.
- *
- * @package			TicketSystem
- * @author			Eugene Serkin
- * @copyright		Copyright (c) 2010, Art-Coder
- * @license			http://#
- * @link			http://art-coder.com
- * @since			Version 0.2
+ * @author:  Eugene Serkin <jserkin@gmail.com>
+ * @version: $Id$
  */
-
-//------------------------------------------------
-
-/**
- * Database connection class
- *
- * @package			TicketSystem
- * @subpackage		Database
- * @category		Libraries
- * @author			Eugene Serkin
- * @link			http://art-coder.com
- */
-
-class DatabaseConnection {
-
+class DatabaseConnection
+{
 	/**
 	 * Database host.
 	 * e.g. localhost
@@ -63,8 +39,3 @@ class DatabaseConnection {
 	protected $DB_PREFIX = "";
 
 }
-//	END DatabaseConnection Class
-
-/* End of file DatabaseConnection.php */
-/* Location: ./system/libraries/database/DatabaseConnection.php */
-?>

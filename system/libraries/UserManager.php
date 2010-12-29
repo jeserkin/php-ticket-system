@@ -1,49 +1,23 @@
 <?php
 
-# Check was this fil linked directly
-if(!defined('SYSPATH')) exit('No direct script access allowed!');
-
 /**
- * Ticket System
- * 
- * Non-commercial application.
- * 
- * @package			TicketSystem
- * @author			Eugene Serkin
- * @copyright		Copyright (c) 2010, Art-Coder
- * @license			http://#
- * @link			http://art-coder.com
- * @since			Version 0.2
+ * @author:  Eugene Serkin <jserkin@gmail.com>
+ * @version: $Id$
  */
-
-//------------------------------------------------
-
-/**
- * UserManager class
- *
- * Class for handling and managing user
- * 
- * @package			TicketSystem
- * @subpackage		Libraries
- * @category		Libraries
- * @author			Eugene Serkin
- * @link			http://art-coder.com
- */
-
-class UserManager extends User {
-	
+class UserManager extends User
+{
 	/**
 	 * Database instance.
 	 * @var MySQLDatabase
 	 */
 	private $db;
-	
+
 	/**
 	 * Validation instance.
 	 * @var Validation
 	 */
 	private $validator;
-	
+
 	/**
 	 * Salt word, for password encryption.
 	 * "um" stands for UserManager(Can be anything else).
@@ -51,7 +25,7 @@ class UserManager extends User {
 	 * @var string
 	 */
 	private $saltWord = "um";
-	
+
 	/**
 	 * Constructor
 	 *
@@ -67,7 +41,7 @@ class UserManager extends User {
 		# If $_COOKIE exist
 		$this->chkSignInState();
 	}
-	
+
 	/**
 	 * This method checks are the $_COOKIE vars set or not.
 	 * If they are, then extende their live time.
@@ -84,7 +58,7 @@ class UserManager extends User {
 			$this->chooseSignInType($_COOKIE['uname'], $_COOKIE['upass'], false);
 		}
 	}
-	
+
 	/**
 	 * Check was sign in attemp succesful or not.
 	 *
@@ -100,7 +74,7 @@ class UserManager extends User {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Choosing type of sign in. Depends on password.
 	 * Is it already hashed or needs hashing.
@@ -120,7 +94,7 @@ class UserManager extends User {
 			return $this->signIn($username, $userpass);
 		}
 	}
-	
+
 	/**
 	 * Method makes Sign in. Sets current user and $_COOKIE for that user.
 	 * Also it sets $_SESSION variables.
@@ -140,28 +114,28 @@ class UserManager extends User {
 				userpass = '".$this->db->escapeVal($userpass)."'
 			LIMIT 1
 		";
-		
+
 		# If record with specified user not found
 		if(!$row = $this->db->fetchAssoc($query)) {
 			return false;
 		}
-		
+
 		# Get user with specified id
 		$user = $this->getUser($row['id']);
-		
+
 		# Set session variables for current user
 		$this->setSessionVars($user);
-		
+
 		# Set $_COOKIE for 2 days
 		setcookie('uname', $_SESSION['username'], time() + 3600*24*2, '/');
 		setcookie('upass', $_SESSION['userpass'], time() + 3600*24*2, '/');
-		
+
 		# Set current user attributes
 		$this->setCurUser($user);
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * Method name explains it all. Remove $_COOKIE.
 	 * Eliminate $_SESSION and redirect to main page.
@@ -177,7 +151,7 @@ class UserManager extends User {
 		# Redirect to main page
 		header("Location: / ");
 	}
-	
+
 	/**
 	 * User password encryption.
 	 * It consists of salt word concatenated with hashed user name and
@@ -191,7 +165,7 @@ class UserManager extends User {
 	private function hashPassword($username, $userpass) {
 		return md5($this->saltWord.md5($username).md5($userpass));
 	}
-	
+
 	/**
 	 * Add new user to database. Check if all fields were correctly filled in
 	 * and were they filled at all. Also check is there already user with such
@@ -238,7 +212,7 @@ class UserManager extends User {
 		# Redirect to main page
 		header("Location: / ");
 	}
-	
+
 	/**
 	 * Check user existance and get his data from database.
 	 *
@@ -258,10 +232,10 @@ class UserManager extends User {
 		$user->userpass = $row['userpass'];
 		$user->email = $row['email'];
 		$user->ugroup = $row['ugroup'];
-		
+
 		return $user;
 	}
-	
+
 	/**
 	 * Set attributes for current user instance.
 	 *
@@ -275,7 +249,7 @@ class UserManager extends User {
 		$this->email = $user->email;
 		$this->ugroup = $user->ugroup;
 	}
-	
+
 	/**
 	 * Search for user in database. Check whether user is
 	 * a numeric value, for example user id or is it an array
@@ -293,7 +267,7 @@ class UserManager extends User {
 				WHERE id = ".$this->db->escapeVal($user)."
 				LIMIT 1
 			";
-			
+
 			return $query;
 		} else if(is_array($user)) {
 			$query = "
@@ -303,16 +277,16 @@ class UserManager extends User {
 				OR email = '".$this->db->escapeVal($user['email'])."'
 				LIMIT 1
 			";
-			
+
 			# If user not found
 			if(!$row = $this->db->fetchAssoc($query)) {
 				return false;
 			}
-			
+
 			return true;
 		}
 	}
-	
+
 	/**
 	 * Set $_SESSION vars for current user.
 	 *
@@ -325,7 +299,7 @@ class UserManager extends User {
 			$_SESSION[$key] = $val;
 		}
 	}
-	
+
 	/**
 	 * Check does user have admin rights.
 	 *
@@ -337,8 +311,3 @@ class UserManager extends User {
 		else return false;
 	}
 }
-//	END UserManager Class
-
-/* End of file UserManager.php */
-/* Location: ./system/libraries/UserManager.php */
-?>
