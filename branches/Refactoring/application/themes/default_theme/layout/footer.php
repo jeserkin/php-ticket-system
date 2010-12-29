@@ -42,6 +42,6 @@ if(!defined('SYSPATH')) exit('No direct script access allowed!');
 	</body>
 </html>
 <?php
-	# Closes connection to server and currently opened DB.
-	$db->closeConnection();
+	// Closes connection to server and currently opened DB.
+	// $db->closeConnection();
 ?>

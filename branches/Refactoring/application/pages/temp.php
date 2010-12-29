@@ -1,4 +1,9 @@
+<style type="text/css">
+	#container {width:700px; font-size:17px;}
+</style>
 <?php
+
+phpinfo(); exit;
 
 function createBlocker()
 {
