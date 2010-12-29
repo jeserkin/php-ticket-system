@@ -1,71 +1,47 @@
 <?php
 
-# Check was this fil linked directly
-if(!defined('SYSPATH')) exit('No direct script access allowed!');
-
 /**
- * Ticket System
- * 
- * Non-commercial application.
- * 
- * @package			Ticket System
- * @author			Eugene Serkin
- * @copyright		Copyright (c) 2010, Art-Coder
- * @license			http://#
- * @link			http://art-coder.com
- * @since			Version 0.2
+ * @author:  Eugene Serkin <jserkin@gmail.com>
+ * @version: $Id$
  */
-
-//------------------------------------------------
-
-/**
- * Error class
- * 
- * @package			Ticket System
- * @subpackage		Libraries
- * @category		Libraries
- * @author			Eugene Serkin
- * @link			http://art-coder.com
- */
-
-class Error {
-	
+class Error
+{
 	/**
 	 * Webpage main address.
 	 * @var string
 	 */
 	private $baseUrl;
-	
+
 	/**
 	 * Path to directory where to store error_log.
 	 * @var string
 	 */
 	private $rootPath;
-	
+
 	/**
 	 * Name of the error log file.
 	 * @var string
 	 */
 	private $fileName;
-	
+
 	/**
 	 * Code of error.
 	 * @var int
 	 */
 	private $errorCode;
-	
+
 	/**
 	 * Message provided for specified error code.
 	 * @var string
 	 */
 	private $errorMsg;
-	
+
 	/**
 	 * Current date and time.
 	 * @var string
 	 */
 	private $curTimeDate;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -79,9 +55,9 @@ class Error {
 		$this->rootPath = $root_path;
 		$this->fileName = $file_name;
 	}
-	
+
 	/* Standart Page Errors. */
-	
+
 	/**
 	 * Error 404.
 	 *
@@ -92,11 +68,11 @@ class Error {
 		$this->curTimeDate = @date('Y-m-d H:i');
 		$reqPage = $this->baseUrl.$_SERVER['REQUEST_URI'];
 		$this->errorMsg = "Error: ".$this->errorCode."\r\n\tThe requested page at this address: ".$reqPage." was not found.\r\n\n";
-		
+
 		require_once(SYSPATH.'/errors/notfound'.EXT);
 		$this->outputError($this->curTimeDate, $this->errorMsg);
 	}
-	
+
 	/**
 	 * Error 403.
 	 *
@@ -107,11 +83,11 @@ class Error {
 		$this->curTimeDate = @date('Y-m-d H:i');
 		$reqPage = $this->baseUrl.$_SERVER['REQUEST_URI'];
 		$this->errorMsg = "Error: ".$this->errorCode."\r\n\tThe requested page at this address: ".$reqPage." is forbidden.\r\n\n";
-		
+
 		require_once(SYSPATH.'/errors/forbidden'.EXT);
 		$this->outputError($this->curTimeDate, $this->errorMsg);
 	}
-	
+
 	/**
 	 * Writing the error to file.
 	 *
@@ -122,13 +98,8 @@ class Error {
 	private function outputError($ctdate, $msg) {
 		$type = 3;
 		$pfile = $this->rootPath.'/'.$this->fileName;
-		
+
 		if(!file_exists($pfile)) fopen($pfile, 'w');
 		error_log($ctdate.' '.$msg, $type, realpath($pfile));
 	}
 }
-//	END Error Class
-
-/* End of file Error.php */
-/* Location: ./system/libraries/Error.php */
-?>

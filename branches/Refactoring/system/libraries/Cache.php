@@ -1,53 +1,29 @@
 <?php
 
-# Check was this fil linked directly
-if(!defined('SYSPATH')) exit('No direct script access allowed!');
-
 /**
- * Ticket System
- * 
- * Non-commercial application.
- * 
- * @package			Ticket System
- * @author			Eugene Serkin
- * @copyright		Copyright (c) 2010, Art-Coder
- * @license			http://#
- * @link			http://art-coder.com
- * @since			Version 0.2
+ * @author:  Eugene Serkin <jserkin@gmail.com>
+ * @version: $Id$
  */
-
-//------------------------------------------------
-
-/**
- * Caching class. Used for cashing config data.
- * 
- * @package			Ticket System
- * @subpackage		Libraries
- * @category		Libraries
- * @author			Eugene Serkin
- * @link			http://art-coder.com
- */
-
-class Cache {
-	
+class Cache
+{
 	/**
 	 * Database instance.
 	 * @var MySQLDatabase
 	 */
 	private $db;
-	
+
 	/**
 	 * File name.
 	 * @var string
 	 */
 	private $fileName;
-	
+
 	/**
 	 * Path to cache file.
 	 * @var string
 	 */
 	private $path;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -61,7 +37,7 @@ class Cache {
 		$this->path = $path;
 		$this->db = $db;
 	}
-	
+
 	/**
 	 * Get settings data from DB.
 	 *
@@ -80,7 +56,7 @@ class Cache {
 		}
 		return $data;
 	}
-	
+
 	/**
 	 * Write serialized data to file.
 	 *
@@ -90,7 +66,7 @@ class Cache {
 		$data = serialize($this->getDataFromDB());
 		file_put_contents($this->path.$this->fileName, $data);
 	}
-	
+
 	/**
 	 * Reads serialized data from file and unserialize it.
 	 *

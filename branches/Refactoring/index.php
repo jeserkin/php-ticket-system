@@ -33,6 +33,17 @@ session_start();
 // Include configs
 require_once( SYSPATH . '/config/config.php' );
 
+require_once( SYSPATH . '/libraries/PathSetter.php' );
+
+if ( ! file_exists( dirname( __FILE__ ) . '/paths.php' ) )
+{
+	$Paths = new PathSetter();
+	$Paths->excludeDirectory( '.svn' );
+	$Paths->addDirectory( APPPATH . '/libraries/' );
+	$Paths->addDirectory( SYSPATH . '/libraries/' );
+	$Paths->savePaths( dirname( __FILE__ ) . '/paths.php' );
+}
+
 // Getting all needed classes
 function __autoload( $class )
 {
@@ -80,7 +91,7 @@ if ( isset( $_REQUEST['sign_out'] ) && $_REQUEST['sign_out'] )
 }
 
 // Link main page
-if ( ! isset( $_REQUEST['show'] ) && ! $_REQUEST['sign_out'] )
+if ( ! isset( $_REQUEST['show'] ) && ! isset( $_REQUEST['sign_out'] ) )
 {
 	if ( isset( $_POST['signUpFormSubmit'] ) )
 	{

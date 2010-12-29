@@ -1,49 +1,23 @@
 <?php
 
-# Check was this fil linked directly
-if(!defined('SYSPATH')) exit('No direct script access allowed!');
-
 /**
- * Ticket System
- * 
- * Non-commercial application.
- * 
- * @package			Ticket System
- * @author			Eugene Serkin
- * @copyright		Copyright (c) 2010, Art-Coder
- * @license			http://#
- * @link			http://art-coder.com
- * @since			Version 0.2
+ * @author:  Eugene Serkin <jserkin@gmail.com>
+ * @version: $Id$
  */
-
-//------------------------------------------------
-
-/**
- * Ticket class
- *
- * Main class for handling tickets.
- * 
- * @package			Ticket System
- * @subpackage		Libraries
- * @category		Libraries
- * @author			Eugene Serkin
- * @link			http://art-coder.com
- */
-
 class Ticket {
-	
+
 	/**
 	 * Database instance.
 	 * @var MySQLDatabase
 	 */
 	private $db;
-	
+
 	/**
 	 * Validation instance.
 	 * @var Validation
 	 */
 	private $validator;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -57,7 +31,7 @@ class Ticket {
 		# Create link for Validation
 		$this->validator = $validator;
 	}
-	
+
 	/**
 	 * Receives ticket topics. Amount depends on user rights.
 	 *
@@ -84,13 +58,13 @@ class Ticket {
 				LIMIT 1
 			";
 		}
-		
+
 		if($this->chkTicketExistance("query", $query) == 0) return false;
-		
+
 		$result = $this->db->fetchAssoc($query);
 		return $result;
 	}
-	
+
 	/**
 	 * Method checks for any replies for specified ticket.
 	 *
@@ -101,11 +75,11 @@ class Ticket {
 	public function chkForReplies($ticket_id) {
 		$query = "SELECT COUNT(1) AS total FROM ts_replies_view WHERE ticket_id = ".$this->db->escapeVal($ticket_id);
 		$result = $this->db->fetchAssoc($query);
-		
+
 		if((int)$result['total'] == 0) return false;
 		else return true;
 	}
-	
+
 	/**
 	 * Get all replies for specified ticket.
 	 *
@@ -121,7 +95,7 @@ class Ticket {
 		);
 		return $query;
 	}
-	
+
 	/**
 	 * Add reply to specified ticket.
 	 *
@@ -134,7 +108,7 @@ class Ticket {
 		if($this->chkTicketExistance("table", "ts_ticket_topic", "id", $ticket_id)) {
 			$this->changeTicketStatus($ticket_id, 1, false);
 		}
-		
+
 		if($this->validator->required($reply_content)) {
 			$this->db->query("
 				INSERT INTO ts_ticket_reply(
@@ -153,7 +127,7 @@ class Ticket {
 			");
 		}
 	}
-	
+
 	/**
 	 * Method for checking the existance of the ticket.
 	 *
@@ -196,10 +170,10 @@ class Ticket {
 				$result = $this->db->numRows($query);
 				break;
 		}
-		
+
 		return $result;
 	}
-	
+
 	/**
 	 * Method for changing status of the ticket.
 	 *
@@ -213,7 +187,7 @@ class Ticket {
 		$this->db->query("UPDATE ts_ticket_topic SET status_id = ".$this->db->escapeVal($status)." WHERE id = ".$this->db->escapeVal($ticket_id));
 		if($redirect) header("Location: / ");
 	}
-	
+
 	/**
 	 * Check status of the ticket
 	 *
@@ -225,11 +199,11 @@ class Ticket {
 		# Status 1 - Opened, 2 - Closed
 		$query = "SELECT status_id FROM ts_ticket_topic WHERE id = ".$this->db->escapeVal($ticket_id);
 		$chkTicketStatus = $this->db->fetchAssoc($query);
-		
+
 		if($chkTicketStatus['status_id'] == 2) return false;
 		else return true;
 	}
-	
+
 	/**
 	 * Get all available priorities.
 	 *
@@ -240,17 +214,17 @@ class Ticket {
 		$allPrior = $this->db->query("SELECT id, priority_name FROM ts_ticket_priority ORDER BY id");
 		$keys = array();
 		$values = array();
-		
+
 		while(($priorities = $this->db->fetchAssoc($allPrior)) != NULL) {
 			//array_push($keys, (int)$priorities['id']);
 			//array_push($value, $priorities['priority_name']);
 			$keys[] = (int)$priorities['id'];
 			$values[] = $priorities['priority_name'];
 		}
-		
+
 		return array_combine($keys, $values);
 	}
-	
+
 	/**
 	 * Get all available categories.
 	 *
@@ -261,17 +235,17 @@ class Ticket {
 		$allCats = $this->db->query("SELECT id, category_name FROM ts_ticket_category ORDER BY id");
 		$keys = array();
 		$values = array();
-		
+
 		while(($categories = $this->db->fetchAssoc($allCats)) != NULL) {
 			//array_push($keys, (int)$categories['id']);
 			//array_push($values, $categories['category_name']);
 			$keys[] = (int)$categories['id'];
 			$values[] = $categories['category_name'];
 		}
-		
+
 		return array_combine($keys, $values);
 	}
-	
+
 	/**
 	 * Add new ticket into database.
 	 *
@@ -314,12 +288,7 @@ class Ticket {
 				");
 			}
 		}
-		
+
 		header("Location: / ");
 	}
 }
-//	END Ticket Class
-
-/* End of file Ticket.php */
-/* Location: ./application/libraries/Ticket.php */
-?>
