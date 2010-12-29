@@ -44,6 +44,9 @@ if ( ! file_exists( dirname( __FILE__ ) . '/paths.php' ) )
 	$Paths->savePaths( dirname( __FILE__ ) . '/paths.php' );
 }
 
+$Loader = new Loader(); // @todo Work it through
+$Loader->load( require( dirname( __FILE__ ) . '/paths.php' ) );
+
 // Getting all needed classes
 function __autoload( $class )
 {
