@@ -197,7 +197,7 @@ elseif ( isset( $_REQUEST['show'] ) && ! empty( $_REQUEST['show'] ) )
 				}
 				break;
 			}
-			case 'lic':
+			case 'license':
 			case 'temp':
 			{
 				require_once( APPPATH . '/pages/' . $_REQUEST['show'] . '.php' );
