@@ -1,11 +1,14 @@
 <?php
 // Error reporting level by default it is set to ALL.
-ini_set( 'error_reporting', 'true' );
+ini_set( 'display_errors', 1 );
+ini_set( 'error_reporting', 1 );
 /**
  * Use strictly for debuging purposes
  * error_reporting(E_ALL | E_STRICT);
  */
-error_reporting(E_ALL | E_STRICT);
+error_reporting( E_ALL | E_STRICT );
+
+date_default_timezone_set( 'Europe/Tallinn' );
 
 /* Default language */
 $config['language'] = 'english';
