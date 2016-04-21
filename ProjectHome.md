@@ -1,0 +1,1 @@
+Simple ticket system which hopefully will have an embedding feature. Also I'm planing to create some sort of API for it, but we  will see how it goes.
